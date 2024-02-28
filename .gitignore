@@ -1,0 +1,57 @@
+# user files
+*.suo
+*.user
+*.sln.docstates
+
+# build
+
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Bb]in/
+[Oo]bj/
+
+# mstest results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+*_i.c
+*_p.c
+*_i.h
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.log
+*.svclog
+*.scc
+
+
+# vs
+.vs/
+Generated\ Files/
+*.psess
+*.vsp
+*.vspx
+
+# windows installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp

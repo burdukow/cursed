@@ -1,0 +1,26 @@
+* text=auto
+*.sql linguist-generated=true
+# project
+*.csproj text eol=lf
+*.sln text eol=lf
+
+# res
+*.resx text eol=lf
+*.xaml text eol=lf
+
+# pics
+*.png binary
+*.jpg binary
+*.ico binary
+
+# lib
+*.dll binary
+*.exe binary
+
+# vs files
+*.suo binary
+*.user binary
+
+# exceptions
+bin/
+obj/
