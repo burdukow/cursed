@@ -1,13 +1,18 @@
 # user files
-*.suo
 *.user
+*.userosscache
 *.sln.docstates
+*.userprefs
 
 # build
-
 [Dd]ebug/
+[Dd]ebugPublic/
 [Rr]elease/
+[Rr]eleases/
 x64/
+x86/
+build/
+bld/
 [Bb]in/
 [Oo]bj/
 
@@ -55,3 +60,13 @@ Generated\ Files/
 *.msix
 *.msm
 *.msp
+
+# archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
