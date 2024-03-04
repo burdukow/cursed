@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cursed"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Курсед" Height="450" Width="800" Closed="Window_Closed" ContentRendered="Window_ContentRendered">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="90*"/>
+            <ColumnDefinition Width="297*"/>
+            <ColumnDefinition Width="23*"/>
+            <ColumnDefinition Width="176*"/>
+            <ColumnDefinition Width="204*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Background="#22a6b3" Grid.ColumnSpan="6">
+            <TextBlock VerticalAlignment="Center" Margin="25 0 0 0" FontFamily="Cascadia Mono">абоба</TextBlock>
+            <StackPanel x:Name="AuthedStackPanel" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
+                <Button Width="120" Height="40" Content="Личный кабинет" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Cascadia Mono"></Button>
+                <Button Width="120" Height="40" Content="Выход" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Cascadia Mono"></Button>
+            </StackPanel>
+            <StackPanel x:Name="NotAuthedStackPanel" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                <Button x:Name="AuthButton" Width="120" Height="40" Content="Вход" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Cascadia Mono" Click="AuthButton_Click"></Button>
+            </StackPanel>
+            <StackPanel x:Name="CancelStackPanel" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                <Button x:Name="CancelButton" Width="120" Height="40" Content="Назад" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Cascadia Mono" Click="CancelButton_Click"></Button>
+            </StackPanel>
+        </Grid>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1"  ContentRendered="MainFrame_ContentRendered" Grid.ColumnSpan="6"/>
     </Grid>
 </Window>
