@@ -20,7 +20,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Background="#22a6b3" Grid.ColumnSpan="6">
-            <TextBlock VerticalAlignment="Center" Margin="25 0 0 0" FontFamily="Cascadia Mono">абоба</TextBlock>
             <StackPanel x:Name="AuthedStackPanel" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
                 <Button Width="120" Height="40" Content="Личный кабинет" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Cascadia Mono"></Button>
                 <Button Width="120" Height="40" Content="Выход" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Cascadia Mono"></Button>
