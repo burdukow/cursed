@@ -25,7 +25,7 @@ namespace cursed.ViewModel
             {
                 if (checkUser == 0)
                 {
-                    throw new Exception("Пользователь не найден");
+                    throw new Exception("Пользователь не найден.\nПроверьте правильность связки Логин-Пароль.");
                 }
                 else
                 {

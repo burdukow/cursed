@@ -13,14 +13,16 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition  Width="200"/>
         </Grid.ColumnDefinitions>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Orientation="Horizontal" Visibility="Hidden" x:Name="AdminStackPanel">
             <TextBlock FontFamily="Karla ExtraLight">Панель Администратора</TextBlock>
             <Button Content="" x:Name="Admin1Button"/>
             <Button Content="" Opacity="0.75" x:Name="Admin2Button"/>
         </StackPanel>
-        <ListView Name="ComputersListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1">
+        <TextBlock FontFamily="Karla ExtraLight" Grid.Row="0" Grid.Column="1" FontSize="18" TextAlignment="Center">Фильтр</TextBlock>
+        <ListView Name="ComputersTypeListView" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Grid.Row="1" Grid.Column="1">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"></WrapPanel>
@@ -28,9 +30,28 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
+                    <Button Click="ComputerTypePageButtonClick">
+                        <Border Padding="0" Background="LightSkyBlue">
+                            <StackPanel Height="50" Width="150">
+                                <TextBlock Text="{Binding ComputerTypeName}"
+            VerticalAlignment="Center" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                    </Button>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView Name="ComputersListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Column="0" Grid.Row="2">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Left"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
                     <Button Click="ComputerPageButtonClick">
-                        <Border CornerRadius="5" Padding="5" Background="LightSkyBlue">
-                            <StackPanel Height="auto" Width="150">
+                        <Border CornerRadius="2" Padding="5" Background="LightSkyBlue">
+                            <StackPanel Height="Auto" Width="150">
                                 <TextBlock Text="{Binding ComputerName}"
                     VerticalAlignment="Center" TextWrapping="Wrap"/>
                             </StackPanel>

@@ -25,6 +25,7 @@ namespace cursed.View
     {
         Core db = new Core();
         List<Computers> arrayComputers;
+        List<ComputerTypes> arrayComputerTypes;
         int idRole = Properties.Settings.Default.idRole;
         public MainPage()
         {
@@ -34,10 +35,19 @@ namespace cursed.View
                 AdminStackPanel.Visibility = Visibility.Visible;
             }
             arrayComputers = db.context.Computers.ToList();
+            arrayComputerTypes = db.context.ComputerTypes.ToList();
             ComputersListView.ItemsSource = arrayComputers;
+            ComputersTypeListView.ItemsSource = arrayComputerTypes;
         }
 
         private void ComputerPageButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Computers computer = button.DataContext as Computers;
+            this.NavigationService.Navigate(new ComputerPage(computer));
+        }
+
+        private void ComputerTypePageButtonClick(object sender, RoutedEventArgs e)
         {
 
         }

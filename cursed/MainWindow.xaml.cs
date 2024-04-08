@@ -24,17 +24,6 @@ namespace cursed
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.idUser = 0;
-            Properties.Settings.Default.idRole = 0;
-            Properties.Settings.Default.Save();
-        }
-
-        private void Window_ContentRendered(object sender, EventArgs e)
-        {
             if (Properties.Settings.Default.idUser == 0)
             {
                 AuthedStackPanel.Visibility = Visibility.Collapsed;
@@ -47,6 +36,17 @@ namespace cursed
                 AuthedStackPanel.Visibility = Visibility.Visible;
                 CancelStackPanel.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.idUser = 0;
+            Properties.Settings.Default.idRole = 0;
+            Properties.Settings.Default.Save();
+        }
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
             MainFrame.Navigate(new MainPage());
         }
 
@@ -65,6 +65,22 @@ namespace cursed
             }
             else
             {
+                CancelStackPanel.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void MainFrame_ContentRendered(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.idUser == 0 && !MainFrame.CanGoBack)
+            {
+                AuthedStackPanel.Visibility = Visibility.Collapsed;
+                NotAuthedStackPanel.Visibility = Visibility.Visible;
+                CancelStackPanel.Visibility = Visibility.Collapsed;
+            }
+            else if (!MainFrame.CanGoBack && Properties.Settings.Default.idUser != 0)
+            {
+                NotAuthedStackPanel.Visibility = Visibility.Collapsed;
+                AuthedStackPanel.Visibility = Visibility.Visible;
                 CancelStackPanel.Visibility = Visibility.Collapsed;
             }
         }
