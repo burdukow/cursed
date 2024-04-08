@@ -1,0 +1,682 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="cursedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Components">
+          <Key>
+            <PropertyRef Name="IdComponent" />
+          </Key>
+          <Property Name="IdComponent" Type="int" Nullable="false" />
+          <Property Name="ComponentModel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ComponentPrice" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="ComponentAmount" Type="int" Nullable="false" />
+          <Property Name="ComponentArticle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ComponentManufacturerId" Type="int" Nullable="false" />
+          <Property Name="ComponentTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComponentTypes">
+          <Key>
+            <PropertyRef Name="IdComponentType" />
+          </Key>
+          <Property Name="IdComponentType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComponentTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Computer_Component_Relationship">
+          <Key>
+            <PropertyRef Name="PC_Comp_RelationId" />
+          </Key>
+          <Property Name="PC_Comp_RelationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComputerId" Type="int" Nullable="false" />
+          <Property Name="ComponentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Computers">
+          <Key>
+            <PropertyRef Name="ComputerId" />
+          </Key>
+          <Property Name="ComputerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComputerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ComputerTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComputerTypes">
+          <Key>
+            <PropertyRef Name="IdComputerType" />
+          </Key>
+          <Property Name="IdComputerType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComputerTypeName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Manufacturers">
+          <Key>
+            <PropertyRef Name="IdManufacturer" />
+          </Key>
+          <Property Name="IdManufacturer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ManufacturerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="IdOrder" />
+          </Key>
+          <Property Name="IdOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="MasterId" Type="int" Nullable="false" />
+          <Property Name="OrderDescription" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="ComponentId" Type="int" Nullable="false" />
+          <Property Name="OrderStatusId" Type="int" Nullable="false" />
+          <Property Name="OrderExecDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderStatuses">
+          <Key>
+            <PropertyRef Name="IdOrderStatus" />
+          </Key>
+          <Property Name="IdOrderStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderStatusName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="IdRole" />
+          </Key>
+          <Property Name="IdRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Components_ComponentTypes">
+          <End Role="ComponentTypes" Type="Self.ComponentTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Components" Type="Self.Components" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComponentTypes">
+              <PropertyRef Name="IdComponentType" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="ComponentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Components_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Components" Type="Self.Components" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="IdManufacturer" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="ComponentManufacturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_Component_Relationship_Components">
+          <End Role="Components" Type="Self.Components" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Computer_Component_Relationship" Type="Self.Computer_Component_Relationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="IdComponent" />
+            </Principal>
+            <Dependent Role="Computer_Component_Relationship">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_Component_Relationship_Computers">
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Computer_Component_Relationship" Type="Self.Computer_Component_Relationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="ComputerId" />
+            </Principal>
+            <Dependent Role="Computer_Component_Relationship">
+              <PropertyRef Name="ComputerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computers_ComputerTypes">
+          <End Role="ComputerTypes" Type="Self.ComputerTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Computers" Type="Self.Computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComputerTypes">
+              <PropertyRef Name="IdComputerType" />
+            </Principal>
+            <Dependent Role="Computers">
+              <PropertyRef Name="ComputerTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Components">
+          <End Role="Components" Type="Self.Components" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="IdComponent" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderStatuses">
+          <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatuses">
+              <PropertyRef Name="IdOrderStatus" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="OrderStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="IdRole" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cursedModelStoreContainer">
+          <EntitySet Name="Components" EntityType="Self.Components" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComponentTypes" EntityType="Self.ComponentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Computer_Component_Relationship" EntityType="Self.Computer_Component_Relationship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Computers" EntityType="Self.Computers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComputerTypes" EntityType="Self.ComputerTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatuses" EntityType="Self.OrderStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Components_ComponentTypes" Association="Self.FK_Components_ComponentTypes">
+            <End Role="ComponentTypes" EntitySet="ComponentTypes" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Components_Manufacturers" Association="Self.FK_Components_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_Component_Relationship_Components" Association="Self.FK_Computer_Component_Relationship_Components">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="Computer_Component_Relationship" EntitySet="Computer_Component_Relationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_Component_Relationship_Computers" Association="Self.FK_Computer_Component_Relationship_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="Computer_Component_Relationship" EntitySet="Computer_Component_Relationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computers_ComputerTypes" Association="Self.FK_Computers_ComputerTypes">
+            <End Role="ComputerTypes" EntitySet="ComputerTypes" />
+            <End Role="Computers" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Components" Association="Self.FK_Orders_Components">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderStatuses" Association="Self.FK_Orders_OrderStatuses">
+            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Users" Association="Self.FK_Orders_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cursedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Components">
+          <Key>
+            <PropertyRef Name="IdComponent" />
+          </Key>
+          <Property Name="IdComponent" Type="Int32" Nullable="false" />
+          <Property Name="ComponentModel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ComponentPrice" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="ComponentAmount" Type="Int32" Nullable="false" />
+          <Property Name="ComponentArticle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ComponentManufacturerId" Type="Int32" Nullable="false" />
+          <Property Name="ComponentTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ComponentTypes" Relationship="Self.FK_Components_ComponentTypes" FromRole="Components" ToRole="ComponentTypes" />
+          <NavigationProperty Name="Manufacturers" Relationship="Self.FK_Components_Manufacturers" FromRole="Components" ToRole="Manufacturers" />
+          <NavigationProperty Name="Computer_Component_Relationship" Relationship="Self.FK_Computer_Component_Relationship_Components" FromRole="Components" ToRole="Computer_Component_Relationship" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Components" FromRole="Components" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="ComponentTypes">
+          <Key>
+            <PropertyRef Name="IdComponentType" />
+          </Key>
+          <Property Name="IdComponentType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComponentTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Components" Relationship="Self.FK_Components_ComponentTypes" FromRole="ComponentTypes" ToRole="Components" />
+        </EntityType>
+        <EntityType Name="Computer_Component_Relationship">
+          <Key>
+            <PropertyRef Name="PC_Comp_RelationId" />
+          </Key>
+          <Property Name="PC_Comp_RelationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComputerId" Type="Int32" Nullable="false" />
+          <Property Name="ComponentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Components" Relationship="Self.FK_Computer_Component_Relationship_Components" FromRole="Computer_Component_Relationship" ToRole="Components" />
+          <NavigationProperty Name="Computers" Relationship="Self.FK_Computer_Component_Relationship_Computers" FromRole="Computer_Component_Relationship" ToRole="Computers" />
+        </EntityType>
+        <EntityType Name="Computers">
+          <Key>
+            <PropertyRef Name="ComputerId" />
+          </Key>
+          <Property Name="ComputerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComputerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ComputerTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Computer_Component_Relationship" Relationship="Self.FK_Computer_Component_Relationship_Computers" FromRole="Computers" ToRole="Computer_Component_Relationship" />
+          <NavigationProperty Name="ComputerTypes" Relationship="Self.FK_Computers_ComputerTypes" FromRole="Computers" ToRole="ComputerTypes" />
+        </EntityType>
+        <EntityType Name="ComputerTypes">
+          <Key>
+            <PropertyRef Name="IdComputerType" />
+          </Key>
+          <Property Name="IdComputerType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComputerTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Computers" Relationship="Self.FK_Computers_ComputerTypes" FromRole="ComputerTypes" ToRole="Computers" />
+        </EntityType>
+        <EntityType Name="Manufacturers">
+          <Key>
+            <PropertyRef Name="IdManufacturer" />
+          </Key>
+          <Property Name="IdManufacturer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ManufacturerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Components" Relationship="Self.FK_Components_Manufacturers" FromRole="Manufacturers" ToRole="Components" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="IdOrder" />
+          </Key>
+          <Property Name="IdOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="MasterId" Type="Int32" Nullable="false" />
+          <Property Name="OrderDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ComponentId" Type="Int32" Nullable="false" />
+          <Property Name="OrderStatusId" Type="Int32" Nullable="false" />
+          <Property Name="OrderExecDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Components" Relationship="Self.FK_Orders_Components" FromRole="Orders" ToRole="Components" />
+          <NavigationProperty Name="OrderStatuses" Relationship="Self.FK_Orders_OrderStatuses" FromRole="Orders" ToRole="OrderStatuses" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="OrderStatuses">
+          <Key>
+            <PropertyRef Name="IdOrderStatus" />
+          </Key>
+          <Property Name="IdOrderStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderStatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_OrderStatuses" FromRole="OrderStatuses" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="IdRole" />
+          </Key>
+          <Property Name="IdRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK_Components_ComponentTypes">
+          <End Role="ComponentTypes" Type="Self.ComponentTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Components" Type="Self.Components" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComponentTypes">
+              <PropertyRef Name="IdComponentType" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="ComponentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Components_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Components" Type="Self.Components" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="IdManufacturer" />
+            </Principal>
+            <Dependent Role="Components">
+              <PropertyRef Name="ComponentManufacturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_Component_Relationship_Components">
+          <End Role="Components" Type="Self.Components" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Computer_Component_Relationship" Type="Self.Computer_Component_Relationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="IdComponent" />
+            </Principal>
+            <Dependent Role="Computer_Component_Relationship">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Components">
+          <End Role="Components" Type="Self.Components" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Components">
+              <PropertyRef Name="IdComponent" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computer_Component_Relationship_Computers">
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Computer_Component_Relationship" Type="Self.Computer_Component_Relationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="ComputerId" />
+            </Principal>
+            <Dependent Role="Computer_Component_Relationship">
+              <PropertyRef Name="ComputerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Computers_ComputerTypes">
+          <End Role="ComputerTypes" Type="Self.ComputerTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Computers" Type="Self.Computers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComputerTypes">
+              <PropertyRef Name="IdComputerType" />
+            </Principal>
+            <Dependent Role="Computers">
+              <PropertyRef Name="ComputerTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderStatuses">
+          <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatuses">
+              <PropertyRef Name="IdOrderStatus" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="OrderStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="IdRole" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cursedEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Components" EntityType="Self.Components" />
+          <EntitySet Name="ComponentTypes" EntityType="Self.ComponentTypes" />
+          <EntitySet Name="Computer_Component_Relationship" EntityType="Self.Computer_Component_Relationship" />
+          <EntitySet Name="Computers" EntityType="Self.Computers" />
+          <EntitySet Name="ComputerTypes" EntityType="Self.ComputerTypes" />
+          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="OrderStatuses" EntityType="Self.OrderStatuses" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Components_ComponentTypes" Association="Self.FK_Components_ComponentTypes">
+            <End Role="ComponentTypes" EntitySet="ComponentTypes" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Components_Manufacturers" Association="Self.FK_Components_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Components" EntitySet="Components" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_Component_Relationship_Components" Association="Self.FK_Computer_Component_Relationship_Components">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="Computer_Component_Relationship" EntitySet="Computer_Component_Relationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Components" Association="Self.FK_Orders_Components">
+            <End Role="Components" EntitySet="Components" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computer_Component_Relationship_Computers" Association="Self.FK_Computer_Component_Relationship_Computers">
+            <End Role="Computers" EntitySet="Computers" />
+            <End Role="Computer_Component_Relationship" EntitySet="Computer_Component_Relationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Computers_ComputerTypes" Association="Self.FK_Computers_ComputerTypes">
+            <End Role="ComputerTypes" EntitySet="ComputerTypes" />
+            <End Role="Computers" EntitySet="Computers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderStatuses" Association="Self.FK_Orders_OrderStatuses">
+            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Users" Association="Self.FK_Orders_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cursedModelStoreContainer" CdmEntityContainer="cursedEntities">
+          <EntitySetMapping Name="Components">
+            <EntityTypeMapping TypeName="cursedModel.Components">
+              <MappingFragment StoreEntitySet="Components">
+                <ScalarProperty Name="IdComponent" ColumnName="IdComponent" />
+                <ScalarProperty Name="ComponentModel" ColumnName="ComponentModel" />
+                <ScalarProperty Name="ComponentPrice" ColumnName="ComponentPrice" />
+                <ScalarProperty Name="ComponentAmount" ColumnName="ComponentAmount" />
+                <ScalarProperty Name="ComponentArticle" ColumnName="ComponentArticle" />
+                <ScalarProperty Name="ComponentManufacturerId" ColumnName="ComponentManufacturerId" />
+                <ScalarProperty Name="ComponentTypeId" ColumnName="ComponentTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComponentTypes">
+            <EntityTypeMapping TypeName="cursedModel.ComponentTypes">
+              <MappingFragment StoreEntitySet="ComponentTypes">
+                <ScalarProperty Name="IdComponentType" ColumnName="IdComponentType" />
+                <ScalarProperty Name="ComponentTypeName" ColumnName="ComponentTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Computer_Component_Relationship">
+            <EntityTypeMapping TypeName="cursedModel.Computer_Component_Relationship">
+              <MappingFragment StoreEntitySet="Computer_Component_Relationship">
+                <ScalarProperty Name="PC_Comp_RelationId" ColumnName="PC_Comp_RelationId" />
+                <ScalarProperty Name="ComputerId" ColumnName="ComputerId" />
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Computers">
+            <EntityTypeMapping TypeName="cursedModel.Computers">
+              <MappingFragment StoreEntitySet="Computers">
+                <ScalarProperty Name="ComputerId" ColumnName="ComputerId" />
+                <ScalarProperty Name="ComputerName" ColumnName="ComputerName" />
+                <ScalarProperty Name="ComputerTypeId" ColumnName="ComputerTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComputerTypes">
+            <EntityTypeMapping TypeName="cursedModel.ComputerTypes">
+              <MappingFragment StoreEntitySet="ComputerTypes">
+                <ScalarProperty Name="IdComputerType" ColumnName="IdComputerType" />
+                <ScalarProperty Name="ComputerTypeName" ColumnName="ComputerTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufacturers">
+            <EntityTypeMapping TypeName="cursedModel.Manufacturers">
+              <MappingFragment StoreEntitySet="Manufacturers">
+                <ScalarProperty Name="IdManufacturer" ColumnName="IdManufacturer" />
+                <ScalarProperty Name="ManufacturerName" ColumnName="ManufacturerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="cursedModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+                <ScalarProperty Name="OrderDescription" ColumnName="OrderDescription" />
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="OrderStatusId" ColumnName="OrderStatusId" />
+                <ScalarProperty Name="OrderExecDate" ColumnName="OrderExecDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatuses">
+            <EntityTypeMapping TypeName="cursedModel.OrderStatuses">
+              <MappingFragment StoreEntitySet="OrderStatuses">
+                <ScalarProperty Name="IdOrderStatus" ColumnName="IdOrderStatus" />
+                <ScalarProperty Name="OrderStatusName" ColumnName="OrderStatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="cursedModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="cursedModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

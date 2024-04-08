@@ -20,18 +20,22 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Background="#22a6b3" Grid.ColumnSpan="6">
-            <TextBlock VerticalAlignment="Center" Margin="25 0 0 0" FontFamily="Cascadia Mono">абоба</TextBlock>
-            <StackPanel x:Name="AuthedStackPanel" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
-                <Button Width="120" Height="40" Content="Личный кабинет" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Cascadia Mono"></Button>
-                <Button Width="120" Height="40" Content="Выход" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Cascadia Mono"></Button>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="721*"/>
+                <ColumnDefinition Width="59*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="AuthedStackPanel" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1" Grid.Row="0" Margin="520,0,0,0" Grid.ColumnSpan="2">
+                <Button Width="120" Height="40" Content="Личный кабинет" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Karla ExtraLight" ></Button>
+                <Button Width="120" Height="40" Content="Выход" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Karla ExtraLight"></Button>
             </StackPanel>
-            <StackPanel x:Name="NotAuthedStackPanel" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
-                <Button x:Name="AuthButton" Width="120" Height="40" Content="Вход" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Cascadia Mono" Click="AuthButton_Click"></Button>
+            <StackPanel x:Name="NotAuthedStackPanel" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1" Margin="650,0,0,0" Grid.ColumnSpan="2">
+                <Button x:Name="AuthButton" Width="120" Height="40" Content="Вход" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Karla ExtraLight" Click="AuthButton_Click"></Button>
             </StackPanel>
-            <StackPanel x:Name="CancelStackPanel" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
-                <Button x:Name="CancelButton" Width="120" Height="40" Content="Назад" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Cascadia Mono" Click="CancelButton_Click"></Button>
+            <StackPanel x:Name="CancelStackPanel" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="1" Margin="650,0,0,0" Grid.ColumnSpan="2">
+                <Button x:Name="CancelButton" Width="120" Height="40" Content="Назад" Margin="0 0 10 0" Background="#7ed6df" FontFamily="Karla ExtraLight" Click="CancelButton_Click"></Button>
             </StackPanel>
         </Grid>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1"  ContentRendered="MainFrame_ContentRendered" Grid.ColumnSpan="6"/>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1" Grid.ColumnSpan="6"/>
     </Grid>
 </Window>

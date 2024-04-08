@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="267cd92645f0486faea5a8d3ea7e95e0" Name="Diagram1">
+        <EntityTypeShape EntityType="cursedModel.Components" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursedModel.ComponentTypes" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursedModel.Computer_Component_Relationship" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursedModel.Computers" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursedModel.ComputerTypes" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursedModel.Manufacturers" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursedModel.Orders" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursedModel.OrderStatuses" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursedModel.Roles" Width="1.5" PointX="3.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursedModel.Users" Width="1.5" PointX="6" PointY="12.25" IsExpanded="true" />
+        <AssociationConnector Association="cursedModel.FK_Components_ComponentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="cursedModel.FK_Components_Manufacturers" ManuallyRouted="false" />
+        <AssociationConnector Association="cursedModel.FK_Computer_Component_Relationship_Components" ManuallyRouted="false" />
+        <AssociationConnector Association="cursedModel.FK_Orders_Components" ManuallyRouted="false" />
+        <AssociationConnector Association="cursedModel.FK_Computer_Component_Relationship_Computers" ManuallyRouted="false" />
+        <AssociationConnector Association="cursedModel.FK_Computers_ComputerTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="cursedModel.FK_Orders_OrderStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="cursedModel.FK_Orders_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="cursedModel.FK_Users_Roles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

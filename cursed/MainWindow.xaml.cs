@@ -33,11 +33,6 @@ namespace cursed
             Properties.Settings.Default.Save();
         }
 
-        private void MainFrame_ContentRendered(object sender, EventArgs e)
-        {
-
-        }
-
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             if (Properties.Settings.Default.idUser == 0)
@@ -52,6 +47,7 @@ namespace cursed
                 AuthedStackPanel.Visibility = Visibility.Visible;
                 CancelStackPanel.Visibility = Visibility.Collapsed;
             }
+            MainFrame.Navigate(new MainPage());
         }
 
         private void AuthButton_Click(object sender, RoutedEventArgs e)

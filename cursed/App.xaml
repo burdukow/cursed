@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:cursed"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+         <FontFamily x:Key="Karla">Karla ExtraLight</FontFamily>
+        <ResourceDictionary x:Key="Style">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Dictionaries/Dictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
