@@ -1,18 +1,7 @@
 ﻿using cursed.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace cursed.View
 {
@@ -23,7 +12,7 @@ namespace cursed.View
     {
         Core db = new Core();
         List<Components> arrayComponents;
-        List<Computer_Component_Relationship> arrayComputerComponentRelationship = new List<Computer_Component_Relationship>();
+        List<ComputerComponentRelationship> arrayComputerComponentRelationship = new List<ComputerComponentRelationship>();
         string computerSpecification;
         Computers currentComputer;
         public ComputerPage(Computers computer)
@@ -35,7 +24,7 @@ namespace cursed.View
         }
         private void ComponentBinding()
         {
-            arrayComputerComponentRelationship = db.context.Computer_Component_Relationship.ToList();
+            arrayComputerComponentRelationship = db.context.ComputerComponentRelationship.ToList();
 
             var componentIds = arrayComputerComponentRelationship
                 .Where(cr => cr.ComputerId == currentComputer.ComputerId)
@@ -63,6 +52,11 @@ namespace cursed.View
             }
 
             ComputerComponentsTextBlock.Text = computerSpecification;
+        }
+
+        private void RemoveComputerButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
         }
     }
 }

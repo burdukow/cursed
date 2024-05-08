@@ -7,26 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace cursed.Model
+namespace cursedTests.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Computers
+    public partial class Manufacturers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Computers()
+        public Manufacturers()
         {
-            this.ComputerComponentRelationship = new HashSet<ComputerComponentRelationship>();
+            this.Components = new HashSet<Components>();
         }
     
-        public int ComputerId { get; set; }
-        public string ComputerName { get; set; }
-        public int ComputerTypeId { get; set; }
-        public string ComputerPicPath { get; set; }
+        public int IdManufacturer { get; set; }
+        public string ManufacturerName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ComputerComponentRelationship> ComputerComponentRelationship { get; set; }
-        public virtual ComputerTypes ComputerTypes { get; set; }
+        public virtual ICollection<Components> Components { get; set; }
     }
 }

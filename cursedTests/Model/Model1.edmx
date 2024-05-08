@@ -558,7 +558,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="cursedEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="cursedEntitiesTests" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Components" EntityType="Self.Components" />
           <EntitySet Name="ComponentTypes" EntityType="Self.ComponentTypes" />
           <EntitySet Name="ComputerComponentRelationship" EntityType="Self.ComputerComponentRelationship" />
@@ -653,7 +653,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="cursedModelStoreContainer" CdmEntityContainer="cursedEntities">
+        <EntityContainerMapping StorageEntityContainer="cursedModelStoreContainer" CdmEntityContainer="cursedEntitiesTests">
           <EntitySetMapping Name="Components">
             <EntityTypeMapping TypeName="cursedModel.Components">
               <MappingFragment StoreEntitySet="Components">

@@ -13,6 +13,14 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Button Click="RemoveComputerButton_Click" Background="LightSkyBlue" Height="25" Width="75" HorizontalAlignment="Right">
+            <Border Padding="0" >
+                <StackPanel >
+                    <TextBlock Text="Удалить"
+            VerticalAlignment="Center" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+        </Button>
         <TextBlock FontFamily="Karla ExtraLight" Grid.Row="0" FontSize="18" x:Name="ComputerNameTextBlock" TextAlignment="Left"/>
         <TextBlock x:Name="ComputerComponentsTextBlock" Grid.Row="1" VerticalAlignment="Top" TextWrapping="Wrap"/>
     </Grid>

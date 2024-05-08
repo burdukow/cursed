@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace cursed.Model
+namespace cursedTests.Model
 {
     using System;
     using System.Collections.Generic;

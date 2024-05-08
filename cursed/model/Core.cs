@@ -1,11 +1,4 @@
-﻿using cursed.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace cursed.Model
+﻿namespace cursed.Model
 {
     public class Core
     {

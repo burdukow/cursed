@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace cursed.Model
+namespace cursedTests.Model
 {
     using System;
     using System.Data.Entity;
@@ -15,10 +15,10 @@ namespace cursed.Model
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class cursedEntities : DbContext
+    public partial class cursedEntitiesTests : DbContext
     {
-        public cursedEntities()
-            : base("name=cursedEntities")
+        public cursedEntitiesTests()
+            : base("name=cursedEntitiesTests")
         {
         }
     

@@ -12,7 +12,7 @@ namespace cursed.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Computer_Component_Relationship
+    public partial class ComputerComponentRelationship
     {
         public int PC_Comp_RelationId { get; set; }
         public int ComputerId { get; set; }

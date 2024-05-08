@@ -1,19 +1,8 @@
 ﻿using cursed.Model;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace cursed.View
 {
@@ -35,8 +24,10 @@ namespace cursed.View
             }
             arrayComputers = db.context.Computers.ToList();
             arrayComputerTypes = db.context.ComputerTypes.ToList();
+            arrayComputerTypes.Add(new ComputerTypes { IdComputerType = 0, ComputerTypeName = "Все типы компьютеров" });
             ComputersListView.ItemsSource = arrayComputers;
             ComputersTypeListView.ItemsSource = arrayComputerTypes;
+
         }
 
         private void ComputerPageButtonClick(object sender, RoutedEventArgs e)
@@ -48,7 +39,17 @@ namespace cursed.View
 
         private void ComputerTypePageButtonClick(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
+            ComputerTypes computerType = button.DataContext as ComputerTypes;
+            if (computerType.IdComputerType == 0)
+            {
 
+                ComputersListView.ItemsSource = arrayComputers;
+            }
+            else
+            {
+                ComputersListView.ItemsSource = arrayComputers.Where(c => c.ComputerTypeId == computerType.IdComputerType).ToList();
+            }
         }
     }
 }

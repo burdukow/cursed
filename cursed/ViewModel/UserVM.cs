@@ -1,16 +1,13 @@
 ﻿using cursed.Model;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cursed.ViewModel
 {
     public class UserVM
     {
-        Core db = new Core();
-        public bool AuthCheck(string login, string password)
+        public static Core db = new Core();
+        public static bool AuthCheck(string login, string password)
         {
             int checkUser = db.context.Users.Where(x => x.Login == login && x.Password == password).Count();
             if (String.IsNullOrEmpty(login))
