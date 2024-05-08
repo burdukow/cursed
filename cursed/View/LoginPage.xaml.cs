@@ -1,5 +1,4 @@
-﻿using cursed.model;
-using cursed.Model;
+﻿using cursed.Model;
 using cursed.ViewModel;
 using System;
 using System.Collections.Generic;
