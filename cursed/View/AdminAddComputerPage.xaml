@@ -9,6 +9,47 @@
       Title="AdminAddComputerPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 5 0">
+            <TextBlock Margin="0 4 0 4">Название компьютера:</TextBlock>
+            <TextBlock Margin="0 4 0 4">Тип компьютера:</TextBlock>
+            <TextBlock Margin="0 4 0 4">Процессор:</TextBlock>
+            <TextBlock Margin="0 4 0 4">Материнская плата:</TextBlock>
+            <TextBlock Margin="0 4 0 4">Видеокарта:</TextBlock>
+            <TextBlock Margin="0 4 0 4">Оперативная память:</TextBlock>
+            <TextBlock Margin="0 4 0 4">Накопитель:</TextBlock>
+            <TextBlock Margin="0 4 0 4">Процессорный кулер:</TextBlock>
+            <TextBlock Margin="0 4 0 4">Блок питания:</TextBlock>
+            <TextBlock Margin="0 4 0 4">Сетевая карта:</TextBlock>
+            <TextBlock Margin="0 4 0 4">Звуковая карта:</TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0" Width="300">
+            <TextBox x:Name="ComputerTitleTextBox" Margin="0 1 10 1"/>
+            <ComboBox x:Name="ComputerTypeComboBox"  Margin="0 1 10 1"/>
+            <StackPanel HorizontalAlignment="Left"  Width="200">
+                <ComboBox x:Name="ProcessorComboBox"  Margin="0 1 10 1"/>
+                <ComboBox x:Name="MotherboardComboBox"  Margin="0 1 10 1"/>
+                <ComboBox x:Name="VideoCardComboBox"  Margin="0 1 10 1"/>
+                <ComboBox x:Name="RAMComboBox"  Margin="0 1 10 1"/>
+                <ComboBox x:Name="CapacityComboBox"  Margin="0 1 10 1"/>
+                <ComboBox x:Name="CPUCoolerComboBox"  Margin="0 1 10 1"/>
+                <ComboBox x:Name="PSUComboBox"  Margin="0 1 10 1"/>
+                <ComboBox x:Name="NetworkCardComboBox"  Margin="0 1 10 1"/>
+                <ComboBox x:Name="SoundCardComboBox"  Margin="0 1 10 1"/>
+            </StackPanel>
+        </StackPanel>
+        <Button Grid.Column="2" Width="200" Height="200" VerticalAlignment="Center">
+            <Image x:Name="ComputerImage" Width="200" Height="200"></Image>
+        </Button>
+        <TextBlock Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 20">Загрузить изображение</TextBlock>
+        <Button Grid.Row="1" Click="AddNewComputerButtonClick" Grid.Column="2" Margin="0 30 0 0" Width="250" VerticalAlignment="Top">Добавить</Button>
     </Grid>
 </Page>

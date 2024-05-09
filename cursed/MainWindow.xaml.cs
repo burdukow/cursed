@@ -63,18 +63,28 @@ namespace cursed
             {
                 CancelStackPanel.Visibility = Visibility.Visible;
             }
-            if (Properties.Settings.Default.idUser == 0 && !MainFrame.CanGoBack)
+            else if (!MainFrame.CanGoBack)
+            {
+                CancelStackPanel.Visibility = Visibility.Collapsed;
+            }
+            if (Properties.Settings.Default.idUser == 0)
             {
                 AuthedStackPanel.Visibility = Visibility.Collapsed;
                 NotAuthedStackPanel.Visibility = Visibility.Visible;
-                CancelStackPanel.Visibility = Visibility.Collapsed;
             }
-            else if (!MainFrame.CanGoBack && Properties.Settings.Default.idUser != 0)
+            else if(Properties.Settings.Default.idUser != 0)
             {
-                NotAuthedStackPanel.Visibility = Visibility.Collapsed;
                 AuthedStackPanel.Visibility = Visibility.Visible;
-                CancelStackPanel.Visibility = Visibility.Collapsed;
+                NotAuthedStackPanel.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.idUser = 0;
+            Properties.Settings.Default.idRole = 0;
+            Properties.Settings.Default.Save();
+            MainFrame.NavigationService.Refresh();
         }
     }
 }

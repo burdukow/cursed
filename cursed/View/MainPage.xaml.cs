@@ -24,7 +24,7 @@ namespace cursed.View
             }
             arrayComputers = db.context.Computers.ToList();
             arrayComputerTypes = db.context.ComputerTypes.ToList();
-            arrayComputerTypes.Add(new ComputerTypes { IdComputerType = 0, ComputerTypeName = "Все типы компьютеров" });
+            arrayComputerTypes.Add(new ComputerTypes { IdComputerType = 0, ComputerTypeName = "Все компьютеры" });
             ComputersListView.ItemsSource = arrayComputers;
             ComputersTypeListView.ItemsSource = arrayComputerTypes;
 
@@ -50,6 +50,21 @@ namespace cursed.View
             {
                 ComputersListView.ItemsSource = arrayComputers.Where(c => c.ComputerTypeId == computerType.IdComputerType).ToList();
             }
+        }
+
+        private void AdminAddComputerButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new AdminAddComputerPage());    
+        }
+
+        private void AllWarrantyTicketsButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddNewWarrantyTicketButtonClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

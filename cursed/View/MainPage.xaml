@@ -18,8 +18,8 @@
         </Grid.ColumnDefinitions>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Orientation="Horizontal" Visibility="Hidden" x:Name="AdminStackPanel">
             <TextBlock FontFamily="Karla ExtraLight">Панель Администратора</TextBlock>
-            <Button Content="" x:Name="Admin1Button"/>
-            <Button Content="" Opacity="0.75" x:Name="Admin2Button"/>
+            <Button Content="Добавить компьютер" Click ="AdminAddComputerButtonClick"/>
+            <Button Content="Гарантийные заявки" Opacity="0.75" Click ="AllWarrantyTicketsButtonClick"/>
         </StackPanel>
         <TextBlock FontFamily="Karla ExtraLight" Grid.Row="0" Grid.Column="1" FontSize="18" TextAlignment="Center">Фильтр</TextBlock>
         <ListView Name="ComputersTypeListView" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Grid.Row="1" Grid.Column="1">
@@ -60,5 +60,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Grid.Column="1" Grid.Row="1" Height="20" Width="180" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 10 10" Click="AddNewWarrantyTicketButtonClick">Добавить гарантийную заявку</Button>
     </Grid>
 </Page>
