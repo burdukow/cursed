@@ -1,0 +1,23 @@
+﻿<Page x:Class="cursed.View.CreateWarrantyTicketPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:cursed.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CreateWarrantyTicketPage">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 20 0 0">
+            <TextBlock>Выберите компьютер:</TextBlock>
+            <ComboBox x:Name="WarrantyComputerComboBox" Width="400" Height="30" />
+            <TextBlock>Проблема с...</TextBlock>
+            <ComboBox x:Name="WarrantyProblemComboBox" Width="400" Height="30"/>
+            <TextBlock>Дополнительно:</TextBlock>
+            <TextBox x:Name="WarrantyAdditionalTextBox" Width="400" Height="200"/>
+            <Button Margin="0 20 0 0" Click="CreateWarrantyTicketButtonClick">Подать заявку</Button>
+        </StackPanel>
+        
+    </Grid>
+</Page>

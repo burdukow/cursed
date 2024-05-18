@@ -64,7 +64,7 @@ namespace cursed.View
 
         private void AddNewWarrantyTicketButtonClick(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new CreateWarrantyTicketPage());
         }
     }
 }

@@ -46,10 +46,11 @@
                 <ComboBox x:Name="SoundCardComboBox"  Margin="0 1 10 1"/>
             </StackPanel>
         </StackPanel>
-        <Button Grid.Column="2" Width="200" Height="200" VerticalAlignment="Center">
-            <Image x:Name="ComputerImage" Width="200" Height="200"></Image>
+        <Image x:Name="ComputerImage"  Grid.Column="2"  Width="200" Height="200"></Image>
+        <Button Grid.Column="2"  Grid.Row="1" Width="200" VerticalAlignment="top" Click="AddComputerImageButtonClick" >
+            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center">Загрузить изображение</TextBlock>
         </Button>
-        <TextBlock Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 20">Загрузить изображение</TextBlock>
-        <Button Grid.Row="1" Click="AddNewComputerButtonClick" Grid.Column="2" Margin="0 30 0 0" Width="250" VerticalAlignment="Top">Добавить</Button>
+        
+        <Button Grid.Row="1" Click="AddNewComputerButtonClick" Grid.Column="2" Margin="0 30 0 0" Width="250" VerticalAlignment="Center">Добавить</Button>
     </Grid>
 </Page>

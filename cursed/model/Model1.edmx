@@ -60,12 +60,12 @@
             <PropertyRef Name="IdOrder" />
           </Key>
           <Property Name="IdOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="MasterId" Type="int" Nullable="false" />
+          <Property Name="MasterId" Type="int" />
           <Property Name="OrderDescription" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="ComponentId" Type="int" Nullable="false" />
+          <Property Name="ComputerId" Type="int" Nullable="false" />
           <Property Name="OrderStatusId" Type="int" Nullable="false" />
-          <Property Name="OrderExecDate" Type="date" Nullable="false" />
+          <Property Name="OrderExecDate" Type="date" />
         </EntityType>
         <EntityType Name="OrderStatuses">
           <Key>
@@ -188,6 +188,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Orders_Computers">
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="ComputerId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ComputerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Orders_OrderStatuses">
           <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -199,20 +213,6 @@
             </Principal>
             <Dependent Role="Orders">
               <PropertyRef Name="OrderStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Orders_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="IdUser" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -297,12 +297,12 @@
             <End Role="Components" EntitySet="Components" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK_Orders_OrderStatuses" Association="Self.FK_Orders_OrderStatuses">
-            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
+          <AssociationSet Name="FK_Orders_Computers" Association="Self.FK_Orders_Computers">
+            <End Role="Computers" EntitySet="Computers" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK_Orders_Users" Association="Self.FK_Orders_Users">
-            <End Role="Users" EntitySet="Users" />
+          <AssociationSet Name="FK_Orders_OrderStatuses" Association="Self.FK_Orders_OrderStatuses">
+            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
@@ -359,6 +359,7 @@
           <Property Name="ComputerPicPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ComputerComponentRelationship" Relationship="Self.FK_Computer_Component_Relationship_Computers" FromRole="Computers" ToRole="ComputerComponentRelationship" />
           <NavigationProperty Name="ComputerTypes" Relationship="Self.FK_Computers_ComputerTypes" FromRole="Computers" ToRole="ComputerTypes" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Computers" FromRole="Computers" ToRole="Orders" />
         </EntityType>
         <EntityType Name="ComputerTypes">
           <Key>
@@ -381,15 +382,15 @@
             <PropertyRef Name="IdOrder" />
           </Key>
           <Property Name="IdOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="MasterId" Type="Int32" Nullable="false" />
+          <Property Name="MasterId" Type="Int32" />
           <Property Name="OrderDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ComponentId" Type="Int32" Nullable="false" />
+          <Property Name="ComputerId" Type="Int32" Nullable="false" />
           <Property Name="OrderStatusId" Type="Int32" Nullable="false" />
-          <Property Name="OrderExecDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OrderExecDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Components" Relationship="Self.FK_Orders_Components" FromRole="Orders" ToRole="Components" />
+          <NavigationProperty Name="Computers" Relationship="Self.FK_Orders_Computers" FromRole="Orders" ToRole="Computers" />
           <NavigationProperty Name="OrderStatuses" Relationship="Self.FK_Orders_OrderStatuses" FromRole="Orders" ToRole="OrderStatuses" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
         </EntityType>
         <EntityType Name="OrderStatuses">
           <Key>
@@ -429,7 +430,6 @@
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
         </EntityType>
         <Association Name="FK_Components_ComponentTypes">
@@ -516,6 +516,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Orders_Computers">
+          <End Role="Computers" Type="Self.Computers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computers">
+              <PropertyRef Name="ComputerId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ComputerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Orders_OrderStatuses">
           <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -527,20 +541,6 @@
             </Principal>
             <Dependent Role="Orders">
               <PropertyRef Name="OrderStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Orders_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="IdUser" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -594,12 +594,12 @@
             <End Role="ComputerTypes" EntitySet="ComputerTypes" />
             <End Role="Computers" EntitySet="Computers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Orders_OrderStatuses" Association="Self.FK_Orders_OrderStatuses">
-            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
+          <AssociationSet Name="FK_Orders_Computers" Association="Self.FK_Orders_Computers">
+            <End Role="Computers" EntitySet="Computers" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK_Orders_Users" Association="Self.FK_Orders_Users">
-            <End Role="Users" EntitySet="Users" />
+          <AssociationSet Name="FK_Orders_OrderStatuses" Association="Self.FK_Orders_OrderStatuses">
+            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
@@ -714,10 +714,10 @@
             <EntityTypeMapping TypeName="cursedModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="MasterId" ColumnName="MasterId" />
                 <ScalarProperty Name="OrderDescription" ColumnName="OrderDescription" />
                 <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="ComputerId" ColumnName="ComputerId" />
                 <ScalarProperty Name="OrderStatusId" ColumnName="OrderStatusId" />
                 <ScalarProperty Name="OrderExecDate" ColumnName="OrderExecDate" />
               </MappingFragment>

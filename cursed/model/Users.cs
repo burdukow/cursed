@@ -14,12 +14,6 @@ namespace cursed.Model
     
     public partial class Users
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
-        {
-            this.Orders = new HashSet<Orders>();
-        }
-    
         public int IdUser { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
@@ -29,8 +23,6 @@ namespace cursed.Model
         public string Password { get; set; }
         public int RoleId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
         public virtual Roles Roles { get; set; }
     }
 }
