@@ -12,18 +12,7 @@ namespace cursed
         public MainWindow()
         {
             InitializeComponent();
-            if (Properties.Settings.Default.idUser == 0)
-            {
-                AuthedStackPanel.Visibility = Visibility.Collapsed;
-                NotAuthedStackPanel.Visibility = Visibility.Visible;
-                CancelStackPanel.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                NotAuthedStackPanel.Visibility = Visibility.Collapsed;
-                AuthedStackPanel.Visibility = Visibility.Visible;
-                CancelStackPanel.Visibility = Visibility.Collapsed;
-            }
+            UpdateButtons();
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -36,6 +25,7 @@ namespace cursed
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             MainFrame.Navigate(new MainPage());
+            UpdateButtons();
         }
 
         private void AuthButton_Click(object sender, RoutedEventArgs e)
@@ -59,6 +49,19 @@ namespace cursed
 
         private void MainFrame_ContentRendered(object sender, EventArgs e)
         {
+            UpdateButtons();
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.idUser = 0;
+            Properties.Settings.Default.idRole = 0;
+            Properties.Settings.Default.Save();
+            UpdateButtons();
+            MainFrame.NavigationService.Refresh();
+        }
+        private void UpdateButtons()
+        {
             if (MainFrame.CanGoBack)
             {
                 CancelStackPanel.Visibility = Visibility.Visible;
@@ -72,19 +75,11 @@ namespace cursed
                 AuthedStackPanel.Visibility = Visibility.Collapsed;
                 NotAuthedStackPanel.Visibility = Visibility.Visible;
             }
-            else if(Properties.Settings.Default.idUser != 0)
+            else if (Properties.Settings.Default.idUser != 0)
             {
                 AuthedStackPanel.Visibility = Visibility.Visible;
                 NotAuthedStackPanel.Visibility = Visibility.Collapsed;
             }
-        }
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.idUser = 0;
-            Properties.Settings.Default.idRole = 0;
-            Properties.Settings.Default.Save();
-            MainFrame.NavigationService.Refresh();
         }
     }
 }

@@ -41,8 +41,18 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.8.1.97\lib\net47\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.8.1.97\lib\net47\Prism.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -119,9 +129,22 @@
     <Compile Include="Model\Users.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\OrderVM.cs" />
     <Compile Include="ViewModel\UserVM.cs" />
     <Compile Include="View\AdminAddComputerPage.xaml.cs">
       <DependentUpon>AdminAddComputerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdminAddNewComponentPage.xaml.cs">
+      <DependentUpon>AdminAddNewComponentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdminEditComponentAmountPage.xaml.cs">
+      <DependentUpon>AdminEditComponentAmountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdminWarrantyDescPage.xaml.cs">
+      <DependentUpon>AdminWarrantyDescPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdminWarrantyPage.xaml.cs">
+      <DependentUpon>AdminWarrantyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ComputerPage.xaml.cs">
       <DependentUpon>ComputerPage.xaml</DependentUpon>
@@ -134,6 +157,9 @@
     </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WarrantyPage.xaml.cs">
+      <DependentUpon>WarrantyPage.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +181,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AdminAddNewComponentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminEditComponentAmountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminWarrantyDescPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminWarrantyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ComputerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WarrantyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -210,6 +256,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -221,9 +268,16 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Images\Computers\" />
+    <Resource Include="Resources\Images\Computers\businessmachine.jpg" />
+    <Resource Include="Resources\Images\Computers\workhorse.jpg" />
+    <Resource Include="Resources\Images\Computers\thebrain.jpg" />
+    <Resource Include="Resources\Images\Computers\productivityengine.jpg" />
+    <Resource Include="Resources\Images\Computers\workforceone.jpg" />
+    <Resource Include="Resources\Images\Computers\bsod.jpg" />
+    <Resource Include="Resources\Images\Computers\technomage.jpg" />
+    <Resource Include="Resources\Images\Computers\digitaldragon.jpg" />
+    <Resource Include="Resources\Images\Computers\virtmaster.jpg" />
+    <Resource Include="Resources\Images\Computers\destroyer.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

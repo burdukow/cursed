@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cursed"
         mc:Ignorable="d"
-        Title="Курсед" Height="820" Width="820" Closed="Window_Closed" ContentRendered="Window_ContentRendered">
+        Title="Курсед" Height="820" Width="820" Closed="Window_Closed" ContentRendered="Window_ContentRendered" MinWidth="820" MinHeight="820" MaxWidth="820" MaxHeight="820" WindowStyle="ToolWindow" ResizeMode="CanMinimize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
