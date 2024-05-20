@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="cursedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище cursedModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Components">
           <Key>
             <PropertyRef Name="IdComponent" />
           </Key>
-          <Property Name="IdComponent" Type="int" Nullable="false" />
+          <Property Name="IdComponent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ComponentModel" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ComponentPrice" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="ComponentPrice" Type="float" Nullable="false" />
           <Property Name="ComponentAmount" Type="int" Nullable="false" />
           <Property Name="ComponentArticle" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ComponentManufacturerId" Type="int" Nullable="false" />
@@ -66,6 +66,7 @@
           <Property Name="ComputerId" Type="int" Nullable="false" />
           <Property Name="OrderStatusId" Type="int" Nullable="false" />
           <Property Name="OrderExecDate" Type="date" />
+          <Property Name="OrderCode" Type="nvarchar" MaxLength="6" />
         </EntityType>
         <EntityType Name="OrderStatuses">
           <Key>
@@ -261,7 +262,7 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="cursedModelStoreContainer">
+        <EntityContainer Name="Хранилище cursedModelContainer">
           <EntitySet Name="Components" EntityType="Self.Components" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComponentTypes" EntityType="Self.ComponentTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComputerComponentRelationship" EntityType="Self.ComputerComponentRelationship" Schema="dbo" store:Type="Tables" />
@@ -310,8 +311,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="cursedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -321,7 +321,7 @@
           </Key>
           <Property Name="IdComponent" Type="Int32" Nullable="false" />
           <Property Name="ComponentModel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ComponentPrice" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="ComponentPrice" Type="Double" Nullable="false" />
           <Property Name="ComponentAmount" Type="Int32" Nullable="false" />
           <Property Name="ComponentArticle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ComponentManufacturerId" Type="Int32" Nullable="false" />
@@ -391,6 +391,7 @@
           <NavigationProperty Name="Components" Relationship="Self.FK_Orders_Components" FromRole="Orders" ToRole="Components" />
           <NavigationProperty Name="Computers" Relationship="Self.FK_Orders_Computers" FromRole="Orders" ToRole="Computers" />
           <NavigationProperty Name="OrderStatuses" Relationship="Self.FK_Orders_OrderStatuses" FromRole="Orders" ToRole="OrderStatuses" />
+          <Property Name="OrderCode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="OrderStatuses">
           <Key>
@@ -653,7 +654,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="cursedModelStoreContainer" CdmEntityContainer="cursedEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище cursedModelContainer" CdmEntityContainer="cursedEntities">
           <EntitySetMapping Name="Components">
             <EntityTypeMapping TypeName="cursedModel.Components">
               <MappingFragment StoreEntitySet="Components">
@@ -713,6 +714,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="cursedModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
                 <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
                 <ScalarProperty Name="MasterId" ColumnName="MasterId" />
                 <ScalarProperty Name="OrderDescription" ColumnName="OrderDescription" />
@@ -764,10 +766,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="cursedModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="cursedModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="cursedModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="cursedModel.Store.sp_helpdiagramdefinition">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище cursedModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище cursedModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище cursedModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище cursedModel.sp_helpdiagramdefinition">
             <ResultMapping>
               <ComplexTypeMapping TypeName="cursedModel.sp_helpdiagramdefinition_Result">
                 <ScalarProperty Name="version" ColumnName="version" />
@@ -775,7 +777,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="cursedModel.Store.sp_helpdiagrams">
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище cursedModel.sp_helpdiagrams">
             <ResultMapping>
               <ComplexTypeMapping TypeName="cursedModel.sp_helpdiagrams_Result">
                 <ScalarProperty Name="Database" ColumnName="Database" />
@@ -786,8 +788,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="cursedModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="cursedModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище cursedModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище cursedModel.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -805,7 +807,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
