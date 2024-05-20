@@ -1,7 +1,9 @@
 ﻿using cursed.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace cursed.View
 {
@@ -15,12 +17,20 @@ namespace cursed.View
         List<ComputerComponentRelationship> arrayComputerComponentRelationship = new List<ComputerComponentRelationship>();
         string computerSpecification;
         Computers currentComputer;
+        int idRole = Properties.Settings.Default.idRole;
         public ComputerPage(Computers computer)
         {
             InitializeComponent();
             currentComputer = computer;
             ComputerNameTextBlock.Text = computer.ComputerName;
             ComponentBinding();
+            string filename = computer.ComputerPicPath;
+            string compImagePath = @"../../Resources/Images/Computers/" + filename;
+            ComputerImage.Source = new BitmapImage(new Uri(compImagePath, UriKind.Relative));
+            if (idRole == 1)
+            {
+                AdminControlsStackPanel.Visibility = System.Windows.Visibility.Visible;
+            }
         }
         private void ComponentBinding()
         {

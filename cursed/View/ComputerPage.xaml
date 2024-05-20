@@ -13,15 +13,24 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <StackPanel x:Name="AdminControlsStackPanel" Visibility="Collapsed">
         <Button Click="RemoveComputerButton_Click" Background="LightSkyBlue" Height="25" Width="75" HorizontalAlignment="Right">
             <Border Padding="0" >
-                <StackPanel >
+                
                     <TextBlock Text="Удалить"
             VerticalAlignment="Center" TextWrapping="Wrap"/>
-                </StackPanel>
+                
             </Border>
         </Button>
-        <TextBlock FontFamily="Karla ExtraLight" Grid.Row="0" FontSize="18" x:Name="ComputerNameTextBlock" TextAlignment="Left"/>
+            </StackPanel>
+            <TextBlock FontFamily="Karla ExtraLight" Grid.Row="0" FontSize="18" x:Name="ComputerNameTextBlock" TextAlignment="Left"/>
         <TextBlock x:Name="ComputerComponentsTextBlock" Grid.Row="1" VerticalAlignment="Top" TextWrapping="Wrap"/>
+    </StackPanel>
+        <Image x:Name="ComputerImage"  Grid.Column="1"  Width="300" Height="300"></Image>
     </Grid>
 </Page>

@@ -1,0 +1,30 @@
+﻿<Page x:Class="cursed.View.AdminEditComponentAmountPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:cursed.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AdminEditComponentAmountPage">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition  Width="100"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="ComponentsGrid" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White" RowEditEnding="ComponentsGrid_RowEditEnding">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=IdComponent}" IsReadOnly="True" Width="30" />
+                <DataGridTextColumn Header="Компания" Binding="{Binding Path=Manufacturers.ManufacturerName, UpdateSourceTrigger=PropertyChanged}" Width="80" />
+                <DataGridTextColumn Header="Модель" Binding="{Binding Path=ComponentModel, UpdateSourceTrigger=PropertyChanged}" Width="80" />
+                <DataGridTextColumn Header="Артикул" Binding="{Binding Path=ComponentArticle, UpdateSourceTrigger=PropertyChanged}" Width="80" />
+                <DataGridTextColumn Header="Цена" Binding="{Binding Path=ComponentPrice, UpdateSourceTrigger=PropertyChanged}" Width="80"  />
+                <DataGridTextColumn Header="Количество" Binding="{Binding Path=ComponentAmount, UpdateSourceTrigger=PropertyChanged}"  Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Column="1" Height="25" Width="80" VerticalAlignment="Bottom" Margin="0 0 0 10" Click="AddNewComponentButtonClick">Добавить</Button>
+        <Button Grid.Column="1" Height="25" Width="80" VerticalAlignment="Bottom" Margin="0 0 0 40" Click="RemoveComponentButtonClick">Удалить</Button>
+    </Grid>
+</Page>

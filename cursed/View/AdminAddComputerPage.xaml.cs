@@ -51,8 +51,8 @@ namespace cursed.View
                 ComputerId = newComp.ComputerId,
                 ComponentId = components.Where(x => x.ComponentModel == ProcessorComboBox.Text).FirstOrDefault().IdComponent,
             };
-                
-                db.context.SaveChanges();
+
+            db.context.SaveChanges();
 
             MessageBox.Show("Компьютер успешно добавлен");
         }

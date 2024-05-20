@@ -18,10 +18,6 @@ namespace cursed.View
         public MainPage()
         {
             InitializeComponent();
-            if (idRole == 1)
-            {
-                AdminStackPanel.Visibility = Visibility.Visible;
-            }
             arrayComputers = db.context.Computers.ToList();
             arrayComputerTypes = db.context.ComputerTypes.ToList();
             arrayComputerTypes.Add(new ComputerTypes { IdComputerType = 0, ComputerTypeName = "Все компьютеры" });
@@ -54,17 +50,39 @@ namespace cursed.View
 
         private void AdminAddComputerButtonClick(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new AdminAddComputerPage());    
+            this.NavigationService.Navigate(new AdminAddComputerPage());
         }
 
         private void AllWarrantyTicketsButtonClick(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new AdminWarrantyPage());
         }
 
         private void AddNewWarrantyTicketButtonClick(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new CreateWarrantyTicketPage());
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (idRole == 1)
+            {
+                AdminStackPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AdminStackPanel.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void EditComponentsAmountButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new AdminEditComponentAmountPage());
+        }
+
+        private void WarrantyTicketButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new AdminEditComponentAmountPage());
         }
     }
 }
