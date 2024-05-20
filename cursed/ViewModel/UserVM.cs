@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace cursed.ViewModel
 {
-    public class UserVM
+    public static class UserVM
     {
         public static Core db = new Core();
         public static bool AuthCheck(string login, string password)

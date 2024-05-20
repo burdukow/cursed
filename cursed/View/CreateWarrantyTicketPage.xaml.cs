@@ -1,19 +1,11 @@
 ﻿using cursed.Model;
+using cursed.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 namespace cursed.View
 {
     /// <summary>
@@ -38,22 +30,33 @@ namespace cursed.View
         {
             try
             {
-                Orders newOrder = new Orders()
+                OrderVM.CreateOrder(
+                    WarrantyProblemComboBox.Text,
+                    WarrantyAdditionalTextBox.Text,
+                    WarrantyComputerComboBox.Text
+                    );
+                Orders newOrder = db.context.Orders.Where(x => x.OrderDescription == WarrantyAdditionalTextBox.Text).FirstOrDefault();
+                MessageBox.Show("Гарантийная заявка создана, в скором времени оператор её рассмотрит.\n\n\n" +
+    "Сейчас будет выведен сгенерированный код, обязательно его запишите или сохраните, иначе вы не сможете узнать статус заявки.");
+                MessageBoxResult dialog = MessageBox.Show("Ваш уникальный код заявки: " + newOrder.OrderCode + "\nЖелаете его сохранить?", newOrder.OrderCode, MessageBoxButton.YesNo);
+                if (dialog == MessageBoxResult.Yes)
                 {
-                    OrderDescription = WarrantyAdditionalTextBox.Text,
-                    ComponentId = componentTypes.Where(x => x.ComponentTypeName == WarrantyProblemComboBox.Text).FirstOrDefault().IdComponentType,
-                    ComputerId = arrayComputers.Where(x => x.ComputerName == WarrantyComputerComboBox.Text).FirstOrDefault().ComputerId,
-                    OrderStatusId = 4
-                };
-                db.context.Orders.Add(newOrder);
-                db.context.SaveChanges();
-                MessageBox.Show("Гарантийная заявка создана, в скором времени оператор её рассмотрит.");
-                this.NavigationService.GoBack();
+                    Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+                    dlg.FileName = "Код заявки";
+                    dlg.DefaultExt = ".txt";
+                    dlg.Filter = "Text documents (.txt)|*.txt";
+                    Nullable<bool> result = dlg.ShowDialog();
+                    if (result == true)
+                    {
+                        File.WriteAllText(dlg.FileName, newOrder.OrderCode);
+                    }
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Произошла ошибка при создании заявки!");
+                MessageBox.Show("Произошла ошибка при создании заявки!\n" + ex.Message);
             }
+
         }
     }
 }
