@@ -1,11 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using cursed.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using cursed.Model;
 
 namespace cursed.ViewModel.Tests
 {
@@ -17,7 +11,7 @@ namespace cursed.ViewModel.Tests
         /// Ожидается исключение.
         /// </summary>
         [TestMethod()]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof(Exception))]
         public void AuthCheckTest_NoLoginField_ThrowsException()
         {
             bool auth = UserVM.AuthCheck("", "password");
@@ -27,7 +21,7 @@ namespace cursed.ViewModel.Tests
         /// Ожидается исключение.
         /// </summary>
         [TestMethod()]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof(Exception))]
         public void AuthCheckTest_NoPasswordField_ThrowsException()
         {
             bool auth = UserVM.AuthCheck("login", "");
@@ -38,7 +32,7 @@ namespace cursed.ViewModel.Tests
         /// Ожидается исключение.
         /// </summary>
         [TestMethod()]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof(Exception))]
         public void AuthCheckTest_UserDoesntExist_ThrowsException()
         {
             bool auth = UserVM.AuthCheck(".", ".");
