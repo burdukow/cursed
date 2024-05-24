@@ -24,7 +24,7 @@
                 <DataGridTextColumn Header="Количество" Binding="{Binding Path=ComponentAmount, UpdateSourceTrigger=PropertyChanged}"  Width="80"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Column="1" Height="25" Width="80" VerticalAlignment="Bottom" Margin="0 0 0 10" Click="AddNewComponentButtonClick">Добавить</Button>
-        <Button Grid.Column="1" Height="25" Width="80" VerticalAlignment="Bottom" Margin="0 0 0 40" Click="RemoveComponentButtonClick">Удалить</Button>
+        <Button Grid.Column="1" Height="25" Width="80" VerticalAlignment="Bottom" Margin="0 0 0 10" Click="AddNewComponentButtonClick" Background="#7ed6df" FontFamily="Karla ExtraLight" >Добавить</Button>
+        <Button Grid.Column="1" Height="25" Width="80" VerticalAlignment="Bottom" Margin="0 0 0 40" Click="RemoveComponentButtonClick" Background="#7ed6df" FontFamily="Karla ExtraLight" >Удалить</Button>
     </Grid>
 </Page>

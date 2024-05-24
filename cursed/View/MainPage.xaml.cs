@@ -82,7 +82,7 @@ namespace cursed.View
 
         private void WarrantyTicketButtonClick(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new AdminEditComponentAmountPage());
+            this.NavigationService.Navigate(new WarrantyPage());
         }
     }
 }

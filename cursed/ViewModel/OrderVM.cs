@@ -39,7 +39,7 @@ namespace cursed.ViewModel
             }
             if (computerProblem == string.Empty)
             {
-                throw new Exception("Не выбран тип комплектующего.");
+                throw new Exception("Не выбран компьютер.");
             }
 
             var component = (from type in db.context.ComponentTypes

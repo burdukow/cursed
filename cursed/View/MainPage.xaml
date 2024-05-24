@@ -62,8 +62,8 @@
             </ListView.ItemTemplate>
         </ListView>
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
-            <Button Height="20" Width="190" Margin="0 0 5 5" Click="WarrantyTicketButtonClick">Узнать статус гарантийной заявки</Button>
-            <Button Height="20" Width="190" Margin="0 0 5 5" Click="AddNewWarrantyTicketButtonClick">Создать гарантийную заявку</Button>
+            <Button Background="#7ed6df" FontFamily="Karla ExtraLight"  Height="20" Width="190" Margin="0 0 5 5" Click="WarrantyTicketButtonClick">Узнать статус гарантийной заявки</Button>
+            <Button Background="#7ed6df" FontFamily="Karla ExtraLight"  Height="20" Width="190" Margin="0 0 5 5" Click="AddNewWarrantyTicketButtonClick">Создать гарантийную заявку</Button>
         </StackPanel>
     </Grid>
 </Page>

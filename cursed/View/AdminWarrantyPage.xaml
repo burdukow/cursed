@@ -9,21 +9,48 @@
       Title="AdminWarrantyPage">
 
     <Grid x:Name="grid">
-        <ListView Name="WarrantyListView" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MaxHeight="{Binding ActualHeight, ElementName=page, Mode=OneWay}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Button Padding="2" HorizontalContentAlignment="Left" Click="WarrantyButtonClick" Background="LightSkyBlue" Width="{Binding ActualWidth, ElementName=page, Mode=OneWay}" >
-                        <StackPanel Height="100">
-                            <TextBlock x:Name="ComputerNameTextBlock" Text="{Binding Computers.ComputerName}"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Column="0" Name="WarrantyListView" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MaxHeight="{Binding ActualHeight, ElementName=page, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                    <Button Padding="2" HorizontalContentAlignment="Left" Click="WarrantyButtonClick" Background="#7ed6df" FontFamily="Karla ExtraLight"  Width="{Binding ActualWidth, ElementName=page, Mode=OneWay}" >
+                            <StackPanel Height="100">
+                                <TextBlock x:Name="ComputerNameTextBlock" Text="{Binding Computers.ComputerName}"
 VerticalAlignment="Center" TextWrapping="Wrap"/>
-                            <TextBlock x:Name="ComponentNameTextBlock" Text="{Binding Components.ComponentTypes.ComponentTypeName}"
+                                <TextBlock x:Name="ComponentNameTextBlock" Text="{Binding Components.ComponentTypes.ComponentTypeName}"
 VerticalAlignment="Center" TextWrapping="Wrap"/>
-                            <TextBlock Text="{Binding OrderDescription}"
+                                <TextBlock Text="{Binding OrderDescription}"
             VerticalAlignment="Center" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding OrderStatuses.OrderStatusName}" VerticalAlignment="Bottom"/>
                         </StackPanel>
-                    </Button>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                        </Button>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        <StackPanel Grid.Column="1">
+            <TextBlock FontFamily="Karla ExtraLight" Grid.Row="0" Grid.Column="1" FontSize="18" TextAlignment="Center">Фильтр по статусу</TextBlock>
+            <ListView Name="OrderStatusesListView" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Column="1">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Click="OrderStatusPageButtonClick" Background="#7ed6df" FontFamily="Karla ExtraLight" >
+                            <Border Padding="0" Background="LightSkyBlue">
+                                <StackPanel Height="50" Width="150">
+                                    <TextBlock Text="{Binding OrderStatusName}"
+    VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
+                        </Button>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Page>

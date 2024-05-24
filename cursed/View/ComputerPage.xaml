@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel>
             <StackPanel x:Name="AdminControlsStackPanel" Visibility="Collapsed">
-        <Button Click="RemoveComputerButton_Click" Background="LightSkyBlue" Height="25" Width="75" HorizontalAlignment="Right">
+                <Button Click="RemoveComputerButton_Click" Background="#7ed6df" FontFamily="Karla ExtraLight"  Height="25" Width="75" HorizontalAlignment="Right">
             <Border Padding="0" >
                 
                     <TextBlock Text="Удалить"

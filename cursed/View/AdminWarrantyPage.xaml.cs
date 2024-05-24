@@ -16,8 +16,10 @@ namespace cursed.View
         public AdminWarrantyPage()
         {
             InitializeComponent();
-            orderList = db.context.Orders.Include("Computers").Include("Components").ToList();
+            orderList = db.context.Orders.Include("Computers").Include("Components").Include("OrderStatuses").ToList();
             WarrantyListView.ItemsSource = orderList;
+            var a = orderList.Select(x => x.OrderStatuses).Distinct().ToList();
+            OrderStatusesListView.ItemsSource = a;
         }
 
         private void WarrantyButtonClick(object sender, RoutedEventArgs e)
@@ -27,5 +29,12 @@ namespace cursed.View
             this.NavigationService.Navigate(new AdminWarrantyDescPage(order));
         }
 
+        private void OrderStatusPageButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            OrderStatuses orderStatus = button.DataContext as OrderStatuses;
+            orderList = db.context.Orders.Include("Computers").Include("Components").Include("OrderStatuses").Where(x => x.OrderStatusId == orderStatus.IdOrderStatus).ToList();
+            WarrantyListView.ItemsSource = orderList;
+        }
     }
 }

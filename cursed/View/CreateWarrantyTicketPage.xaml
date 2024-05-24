@@ -16,7 +16,7 @@
             <ComboBox x:Name="WarrantyProblemComboBox" Width="400" Height="30"/>
             <TextBlock>Дополнительно:</TextBlock>
             <TextBox x:Name="WarrantyAdditionalTextBox" Width="400" Height="200"/>
-            <Button Margin="0 20 0 0" Click="CreateWarrantyTicketButtonClick">Подать заявку</Button>
+            <Button Background="#7ed6df" FontFamily="Karla ExtraLight"  Margin="0 20 0 0" Click="CreateWarrantyTicketButtonClick">Подать заявку</Button>
         </StackPanel>
         
     </Grid>

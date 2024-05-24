@@ -5,10 +5,34 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:cursed.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450"  d:DesignWidth="800"
       Title="WarrantyPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel x:Name="WarrantyCodeStackPanel" Orientation="Vertical" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock>Введите код:</TextBlock>
+            <TextBox x:Name="CodeTextBox"></TextBox>
+            <Button Click="CodeWarrantyButtonCLick" Background="#7ed6df" FontFamily="Karla ExtraLight" >Принять</Button>
+        </StackPanel>
+
+        <StackPanel x:Name="WarrantyInfoStackPanel" Visibility="Collapsed">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin=" 20 20" Width="300" Grid.Column="0">
+                <TextBlock x:Name="ComputerNameTextBlock" FontFamily="Karla ExtraLight" FontSize="18"/>
+                <Separator/>
+                <TextBlock Height="75" TextWrapping="WrapWithOverflow" x:Name="ComputerComponentTextBlock" FontFamily="Karla ExtraLight" FontSize="18"/>
+                <Separator/>
+                <ScrollViewer Height="250" >
+                    <TextBlock TextWrapping="WrapWithOverflow" x:Name="WarrantyDescTextBlock" FontFamily="Karla ExtraLight" FontSize="18"/>
+                </ScrollViewer>
+                <TextBlock x:Name="MasterTextBlock" FontFamily="Karla ExtraLight" FontSize="18"/>
+                <TextBlock x:Name="OrderStatusTextBlock" FontFamily="Karla ExtraLight" FontSize="18"/>
+                <TextBlock x:Name="OrderDateExecTextBlock" FontFamily="Karla ExtraLight" FontSize="18"/>
+            </StackPanel>
+            <Image x:Name="ComputerImage"  Grid.Column="1"  Width="300" Height="300"></Image>
+        </StackPanel>
     </Grid>
 </Page>
