@@ -18,9 +18,9 @@
         </Grid.ColumnDefinitions>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Orientation="Horizontal" Visibility="Hidden" x:Name="AdminStackPanel">
             <TextBlock FontFamily="Karla ExtraLight">Панель Менеджера</TextBlock>
-            <Button Content="Добавить компьютер" Click ="AdminAddComputerButtonClick"/>
-            <Button Content="Гарантийные заявки" Opacity="0.75" Click ="AllWarrantyTicketsButtonClick"/>
-            <Button Content="Изменить количество товаров" Opacity="0.75" Click ="EditComponentsAmountButtonClick"/>
+            <Button Background="#7ed6df" FontFamily="Karla ExtraLight" Content="Добавить компьютер" Click ="AdminAddComputerButtonClick"/>
+            <Button Background="#7ed6df" FontFamily="Karla ExtraLight" Content="Гарантийные заявки" Opacity="0.75" Click ="AllWarrantyTicketsButtonClick"/>
+            <Button Background="#7ed6df" FontFamily="Karla ExtraLight" Content="Изменить количество товаров" Opacity="0.75" Click ="EditComponentsAmountButtonClick"/>
         </StackPanel>
         <TextBlock FontFamily="Karla ExtraLight" Grid.Row="0" Grid.Column="1" FontSize="18" TextAlignment="Center">Фильтр</TextBlock>
         <ListView Name="ComputersTypeListView" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Grid.Row="1" Grid.Column="1">

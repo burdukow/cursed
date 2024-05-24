@@ -38,9 +38,9 @@ namespace cursed.View
             ComputerComponentTextBlock.Text = "Проблема с: " +
                 db.context.Components.Where(x => x.IdComponent == order.ComponentId).FirstOrDefault().ComponentTypes.ComponentTypeName + " " +
                 db.context.Manufacturers.Where(x => x.IdManufacturer == db.context.Components.Where(y => y.IdComponent == order.ComponentId).FirstOrDefault().ComponentManufacturerId).FirstOrDefault().ManufacturerName + " " +
-                db.context.Components.Where(x => x.IdComponent == order.ComponentId).FirstOrDefault().ComponentModel + "\nВ наличии: " + db.context.Components.Where(x => x.IdComponent == order.ComponentId).FirstOrDefault().ComponentAmount + " шт.";
+                db.context.Components.Where(x => x.IdComponent == order.ComponentId).FirstOrDefault().ComponentModel;
             WarrantyDescTextBlock.Text = "Описание:\n" + order.OrderDescription;
-            string master = db.context.Users.Where(x => x.IdUser == order.MasterId).Select(x => "Ваш мастер:" + x.LastName + " " + x.FirstName[0] + ". " + x.Patronymic[0] + ".").First();
+            string master = db.context.Users.Where(x => x.IdUser == order.MasterId).FirstOrDefault() == null ? null : db.context.Users.Where(x => x.IdUser == order.MasterId).FirstOrDefault().LastName + " " + db.context.Users.Where(x => x.IdUser == order.MasterId).FirstOrDefault().FirstName;
             MasterTextBlock.Text = master != null? master : "Мастер не назначен";
             string orderStatus = db.context.OrderStatuses.Where(x => x.IdOrderStatus == order.OrderStatusId).Select(x => x.OrderStatusName).First();
             OrderStatusTextBlock.Text = orderStatus;

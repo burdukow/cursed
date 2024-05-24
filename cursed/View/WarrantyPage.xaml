@@ -13,13 +13,13 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel x:Name="WarrantyCodeStackPanel" Orientation="Vertical" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel x:Name="WarrantyCodeStackPanel" Orientation="Vertical" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0">
             <TextBlock>Введите код:</TextBlock>
             <TextBox x:Name="CodeTextBox"></TextBox>
             <Button Click="CodeWarrantyButtonCLick" Background="#7ed6df" FontFamily="Karla ExtraLight" >Принять</Button>
         </StackPanel>
 
-        <StackPanel x:Name="WarrantyInfoStackPanel" Visibility="Collapsed">
+        <StackPanel x:Name="WarrantyInfoStackPanel" Visibility="Collapsed" Grid.Column="0">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin=" 20 20" Width="300" Grid.Column="0">
                 <TextBlock x:Name="ComputerNameTextBlock" FontFamily="Karla ExtraLight" FontSize="18"/>
                 <Separator/>
@@ -32,7 +32,7 @@
                 <TextBlock x:Name="OrderStatusTextBlock" FontFamily="Karla ExtraLight" FontSize="18"/>
                 <TextBlock x:Name="OrderDateExecTextBlock" FontFamily="Karla ExtraLight" FontSize="18"/>
             </StackPanel>
-            <Image x:Name="ComputerImage"  Grid.Column="1"  Width="300" Height="300"></Image>
         </StackPanel>
+        <Image x:Name="ComputerImage"  Grid.Column="1"  Width="300" Height="300"></Image>
     </Grid>
 </Page>
