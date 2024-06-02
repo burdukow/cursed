@@ -1,9 +1,11 @@
 ﻿using cursed.Model;
+using cursed.ViewModel;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -36,33 +38,13 @@ namespace cursed.View
             SoundCardComboBox.ItemsSource = components.Where(x => x.ComponentTypeId == 9).Select(x => x.ComponentModel).ToList();
         }
 
-        private void AddNewComputerButtonClick(object sender, RoutedEventArgs e)
-        {
-            Computers newComp = new Computers
-            {
-                ComputerName = ComputerTitleTextBox.Text,
-                ComputerTypeId = computerTypes.Where(x => x.ComputerTypeName == ComputerTypeComboBox.Text).FirstOrDefault().IdComputerType,
-                ComputerPicPath = ComputerImage.Source.ToString()
-            };
-            db.context.Computers.Add(newComp);
-            // TODO
-            ComputerComponentRelationship computerComponentRelationship = new ComputerComponentRelationship()
-            {
-                ComputerId = newComp.ComputerId,
-                ComponentId = components.Where(x => x.ComponentModel == ProcessorComboBox.Text).FirstOrDefault().IdComponent,
-            };
-
-            db.context.SaveChanges();
-
-            MessageBox.Show("Компьютер успешно добавлен");
-        }
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();
         }
 
-        private void AddComputerImageButtonClick(object sender, RoutedEventArgs e)
+        private async void AddComputerImageButtonClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = "c:\\";
@@ -75,15 +57,48 @@ namespace cursed.View
                 {
                     string path = openFileDialog1.FileName;
                     string filename = openFileDialog1.SafeFileName;
-                    string newFilePath = @"../../Resources/Images/Computers/" + filename;
-                    File.Copy(path, newFilePath);
-                    BitmapImage computerImage = new BitmapImage(new Uri(path));
+                    var uploader = new FilesVM();
+                    string imageUrl = await uploader.UploadImage(path);
+                    BitmapImage computerImage = new BitmapImage(new Uri(imageUrl));
                     ComputerImage.Source = computerImage;
                 }
                 catch
                 {
                     MessageBox.Show("Невозможно загрузить изображение");
                 }
+            }
+        }
+
+        private void AddNewComputerButtonClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                int newCompId = ComputerVM.CreateNewComputer(
+                    ComputerTitleTextBox.Text,
+                    computerTypes.FirstOrDefault(x => x.ComputerTypeName == ComputerTypeComboBox.Text).IdComputerType,
+                    ComputerImage.Source != null ? ((BitmapImage)ComputerImage.Source).UriSource.ToString() : string.Empty
+                );
+
+                ComputerVM.addComputerComponentRelationship(newCompId, ProcessorComboBox.Text);
+                ComputerVM.addComputerComponentRelationship(newCompId, MotherboardComboBox.Text);
+                ComputerVM.addComputerComponentRelationship(newCompId, VideoCardComboBox.Text);
+                ComputerVM.addComputerComponentRelationship(newCompId, RAMComboBox.Text);
+                ComputerVM.addComputerComponentRelationship(newCompId, CapacityComboBox.Text);
+                ComputerVM.addComputerComponentRelationship(newCompId, CPUCoolerComboBox.Text);
+                ComputerVM.addComputerComponentRelationship(newCompId, PSUComboBox.Text);
+                if (NetworkCardComboBox.Text != "")
+                    ComputerVM.addComputerComponentRelationship(newCompId, NetworkCardComboBox.Text);
+                if (SoundCardComboBox.Text != "")
+                    ComputerVM.addComputerComponentRelationship(newCompId, SoundCardComboBox.Text);
+                db.context.SaveChanges();
+
+                MessageBox.Show("Компьютер успешно добавлен");
+                this.NavigationService.GoBack();
+            }
+            catch
+            {
+                MessageBox.Show("Во вермя добавления компьютера произошла ошибка!");
             }
         }
     }
