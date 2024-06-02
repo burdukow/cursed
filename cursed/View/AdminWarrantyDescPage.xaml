@@ -26,6 +26,7 @@
 DisplayMemberPath="OrderStatusName"
 ItemsSource="{Binding OrderStatuses}" x:Name="OrderStatusComboBox" FontFamily="Karla ExtraLight" FontSize="18"/>
             <DatePicker x:Name="OrderDateExecDatePicker" FontFamily="Karla ExtraLight" FontSize="18"/>
+            <Button Click="SaveWarrantyInfo">Сохранить</Button>
         </StackPanel>
         <Image x:Name="ComputerImage"  Grid.Column="1"  Width="300" Height="300"></Image>
     </Grid>
