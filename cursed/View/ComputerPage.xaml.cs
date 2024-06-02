@@ -25,8 +25,8 @@ namespace cursed.View
             ComputerNameTextBlock.Text = computer.ComputerName;
             ComponentBinding();
             string filename = computer.ComputerPicPath;
-            string compImagePath = @"../../Resources/Images/Computers/" + filename;
-            ComputerImage.Source = new BitmapImage(new Uri(compImagePath, UriKind.Relative));
+            //string compImagePath = @"../../Resources/Images/Computers/" + filename;
+            ComputerImage.Source = new BitmapImage(new Uri(filename, UriKind.RelativeOrAbsolute));
             if (idRole == 1)
             {
                 AdminControlsStackPanel.Visibility = System.Windows.Visibility.Visible;
@@ -66,7 +66,9 @@ namespace cursed.View
 
         private void RemoveComputerButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            db.context.Computers.Remove(db.context.Computers.Where(x => x.ComputerId == currentComputer.ComputerId).FirstOrDefault());
+            db.context.SaveChanges();
+            this.NavigationService.Navigate(new MainPage());
         }
     }
 }

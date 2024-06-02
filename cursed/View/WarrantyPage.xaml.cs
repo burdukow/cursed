@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -24,10 +25,14 @@ namespace cursed.View
 
         private void CodeWarrantyButtonCLick(object sender, System.Windows.RoutedEventArgs e)
         {
-            if(orderList.Where(x => x.OrderCode == CodeTextBox.Text).First() != null)
+            if(orderList.Where(x => x.OrderCode == CodeTextBox.Text).FirstOrDefault() != null)
             {
                 Orders order = orderList.Where(x => x.OrderCode == CodeTextBox.Text).First();
                 ShowInfo(order);
+            }
+            else
+            {
+                MessageBox.Show("Заявка не найдена");
             }
         }
         private void ShowInfo(Orders order)
@@ -48,8 +53,7 @@ namespace cursed.View
             OrderDateExecTextBlock.Text = orderExecDate != null ? orderExecDate : "Дата не указана";
             Computers computer = db.context.Computers.Where(x => x.ComputerId == order.ComputerId).FirstOrDefault();
             string filename = computer.ComputerPicPath;
-            string compImagePath = @"../../Resources/Images/Computers/" + filename;
-            ComputerImage.Source = new BitmapImage(new Uri(compImagePath, UriKind.Relative));
+            ComputerImage.Source = new BitmapImage(new Uri(filename, UriKind.RelativeOrAbsolute));
         }
     }
 }

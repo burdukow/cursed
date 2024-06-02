@@ -7,6 +7,19 @@ namespace cursed.ViewModel
     public static class UserVM
     {
         public static Core db = new Core();
+
+        /// <summary>
+        /// Проверяет  валидность логина и пароля пользователя.
+        /// </summary>
+        /// <param name="login">Логин пользователя.</param>
+        /// <param name="password">Пароль пользователя.</param>
+        /// <returns>True, если логин и пароль верны, иначе False.</returns>
+        /// <exception cref="Exception">
+        /// Выбрасывается, если:
+        /// - Не введён логин.
+        /// - Не введён пароль.
+        /// - Пользователь с указанными логином и паролем не найден.
+        /// </exception>
         public static bool AuthCheck(string login, string password)
         {
             int checkUser = db.context.Users.Where(x => x.Login == login && x.Password == password).Count();

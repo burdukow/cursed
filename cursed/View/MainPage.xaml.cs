@@ -31,6 +31,7 @@ namespace cursed.View
             Button button = sender as Button;
             Computers computer = button.DataContext as Computers;
             this.NavigationService.Navigate(new ComputerPage(computer));
+            arrayComputers = db.context.Computers.ToList();
         }
 
         private void ComputerTypePageButtonClick(object sender, RoutedEventArgs e)
@@ -39,7 +40,7 @@ namespace cursed.View
             ComputerTypes computerType = button.DataContext as ComputerTypes;
             if (computerType.IdComputerType == 0)
             {
-
+                arrayComputers = db.context.Computers.ToList();
                 ComputersListView.ItemsSource = arrayComputers;
             }
             else
@@ -72,7 +73,10 @@ namespace cursed.View
             else
             {
                 AdminStackPanel.Visibility = Visibility.Collapsed;
+
             }
+            
+            arrayComputers = db.context.Computers.ToList();
         }
 
         private void EditComponentsAmountButtonClick(object sender, RoutedEventArgs e)

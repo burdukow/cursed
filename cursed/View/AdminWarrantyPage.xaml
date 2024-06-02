@@ -25,6 +25,10 @@ VerticalAlignment="Center" TextWrapping="Wrap"/>
                                 <TextBlock Text="{Binding OrderDescription}"
             VerticalAlignment="Center" TextWrapping="Wrap"/>
                             <TextBlock Text="{Binding OrderStatuses.OrderStatusName}" VerticalAlignment="Bottom"/>
+                            <TextBlock 
+    Text="{Binding Path=Users.LastName, StringFormat='{}{0} {1}. {2}.'}" 
+    VerticalAlignment="Bottom" >
+                            </TextBlock>
                         </StackPanel>
                         </Button>
                     </DataTemplate>

@@ -1,12 +1,19 @@
 ﻿using cursed.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace cursed.ViewModel
 {
     public class OrderVM
     {
+
+        public static Core db = new Core();
+        /// <summary>
+        /// Генерирует случайный шестисимвольный код, состоящий из цифр и букв (в верхнем и нижнем регистре).
+        /// </summary>
+        /// <returns>Сгенерированный код.</returns>
         private static string GenerateCode()
         {
             string symbols = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPSDFGHJKLZXCVBNM";
@@ -22,9 +29,23 @@ namespace cursed.ViewModel
             }
             return generatedCode;
         }
+
+        /// <summary>
+        /// Создает новую заявку на ремонт.
+        /// </summary>
+        /// <param name="ComponentTypeProblem">Название типа комплектующего, с которым проблема.</param>
+        /// <param name="problemDescription">Описание проблемы.</param>
+        /// <param name="computerProblem">Название компьютера, на котором возникла проблема.</param>
+        /// <returns>True, если заявка успешно создана, иначе False.</returns>
+        /// <exception cref="Exception">
+        /// Выбрасывается, если:
+        /// - Не выбран тип комплектующего.
+        /// - Не указана информация о проблеме.
+        /// - Не выбран компьютер.
+        /// - Не найдено комплектующее по указанному названию.
+        /// </exception>
         public static bool CreateOrder(string ComponentTypeProblem, string problemDescription, string computerProblem)
         {
-            Core db = new Core();
             List<Computers> arrayComputers = new List<Computers>();
             List<ComponentTypes> componentTypes = new List<ComponentTypes>();
             arrayComputers = db.context.Computers.ToList();

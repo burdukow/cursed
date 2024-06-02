@@ -67,6 +67,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ComputerVMTests.cs" />
+    <Compile Include="ViewModel\FilesVMTests.cs" />
     <Compile Include="ViewModel\OrderVMTests.cs" />
     <Compile Include="ViewModel\UserVMTests.cs" />
   </ItemGroup>
@@ -83,7 +85,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\testimage.jpg" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
