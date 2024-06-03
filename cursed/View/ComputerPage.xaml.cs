@@ -66,8 +66,13 @@ namespace cursed.View
 
         private void RemoveComputerButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            db.context.Computers.Remove(db.context.Computers.Where(x => x.ComputerId == currentComputer.ComputerId).FirstOrDefault());
-            db.context.SaveChanges();
+            try
+            {
+                db.context.Computers.Remove(db.context.Computers.Where(x => x.ComputerId == currentComputer.ComputerId).FirstOrDefault());
+                db.context.SaveChanges();
+                
+            }
+            catch{}
             this.NavigationService.Navigate(new MainPage());
         }
     }
